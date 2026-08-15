@@ -46,6 +46,7 @@ export const properties = {
       "xml",
       "zabw",
     ],
+    calc: ["csv", "ods", "pdf", "tsv", "xls", "xlsx"],
   },
   to: {
     text: [
@@ -72,6 +73,7 @@ export const properties = {
       "xhtml",
       "xml",
     ],
+    calc: ["csv", "ods", "pdf", "tsv", "xls", "xlsx"],
   },
 };
 
@@ -117,7 +119,7 @@ const filters: Record<FileCategories, Record<string, string | null>> = {
     // filter makes soffice reject a genuine Works document with "source file
     // could not be loaded", even though it converts the same file fine with
     // no --infilter at all (LibreOffice auto-detects it correctly).
-    //
+  
     // null is deliberate for BOTH directions here, not just the import side:
     // this map feeds both --infilter (import) and the --convert-to suffix
     // (export). On import, null lets LibreOffice auto-detect - its Works
@@ -133,7 +135,18 @@ const filters: Record<FileCategories, Record<string, string | null>> = {
     xml: "OpenDocument Text Flat XML",
     zabw: "AbiWord",
   },
-  calc: {},
+  calc: {
+    csv: "Text - txt - csv (StarCalc)",
+    ods: "calc8",
+    ots: "calc8_template",
+    pdf: "calc_pdf_Export",
+    tsv: "Text - txt - csv (StarCalc)",
+    xls: "MS Excel 97",
+    xlsx: "Calc MS Excel 2007 XML",
+    xlsm: "Calc MS Excel 2007 XML VBA",
+    xlt: "MS Excel 97 Vorlage",
+    xltm: "Calc MS Excel 2007 XML Template",
+  },
 };
 
 const getFilters = (fileType: string, converto: string) => {
